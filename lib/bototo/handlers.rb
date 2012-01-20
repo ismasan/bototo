@@ -54,7 +54,6 @@ module Bototo
 
       def self.on(cmd, &block)
         commands[cmd] = block
-        Handlers.register self
       end
 
       def self.commands

@@ -13,6 +13,8 @@ module Bototo
       end
     end
     
+    Bototo.register RulesHandler
+    
   end
   
 end

@@ -18,8 +18,8 @@ module Bototo
     @default_bot ||= Bot.new(config)
   end
   
-  def self.register(&block)
-    Handlers.register &block
+  def self.register(handler_klass = nil, &block)
+    Handlers.register handler_klass, &block
   end
   
   def self.run!

@@ -33,6 +33,8 @@ module Bototo
       end
 
     end
+    
+    Bototo.register ImageHandler
 
   end
 end
