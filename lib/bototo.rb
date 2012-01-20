@@ -5,9 +5,12 @@ require 'multi_json'
 
 module Bototo
   
-  def self.setup(&block)
+  def self.setup(options = nil, &block)
+    options.each do |k,v|
+      config.send "#{k}=", v
+    end if options.kind_of?(Hash)
     yield config if block_given?
-    config
+    self
   end
   
   def self.config
