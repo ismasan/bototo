@@ -23,7 +23,6 @@ module Bototo
               room.stream do |message|
 
                 message.user do |user|
-                  puts "#{user}: #{message}"
 
                   if message.text? && message.body =~ %r{^#{config.bot_name}\s+(.+)}
                     handlers = Handlers.find_with($1)

@@ -18,7 +18,7 @@ module Bototo
       instances = []
       handlers.each do |klass|
         klass.commands.keys.each do |cmd|
-          exp = cmd.kind_of?(Regexp) ? cmd : %r{^(#{cmd})(\s)?}
+          exp = cmd.kind_of?(Regexp) ? cmd : %r{^#{cmd}(.*)?}
           if match = body.match(exp)
             instances << klass.new(cmd, match[1..match.size])
           end
@@ -32,7 +32,7 @@ module Bototo
       attr_reader :room, :message, :user, :matched_command, :matches
 
       def initialize(matched_command, matches)
-        @matched_command, @matches = matched_command, matches
+        @matched_command, @matches = matched_command, matches.map{|m| m.to_s.strip}
       end
       
       def say(text, &block)
