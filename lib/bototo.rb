@@ -26,19 +26,43 @@ module Bototo
   end
   
   def self.run!
+    Bototo.reload_handlers(false)
     EM.run do
       default_bot.run!
       trap("INT") { EM.stop }
     end
   end
   
-  class Config < OpenStruct; end
+  def self.reload_handlers(clear = true)
+    # Undef handler constants to avoid redefinition warnings
+    Handlers.handlers.each do |klass|
+      klass.constants.each do |const|
+        klass.send :remove_const, const.to_s
+      end
+    end
+    # Clear handlers
+    Handlers.handlers.clear if clear
+    # Load all classes
+    config.handler_paths.each do |path|
+      if File.file?(path)
+        Kernel.load path
+      else
+        Dir["#{path}/*.rb"].each do |file_path|
+          Kernel.load file_path
+        end        
+      end
+    end
+  end
+  
+  class Config < OpenStruct
+    DEFAULT_HANDLERS_PATH = File.join(File.dirname(__FILE__), 'bototo', 'handlers')
+    
+    def handler_paths
+      @handler_paths ||= [DEFAULT_HANDLERS_PATH]
+    end
+  end
   
 end
 
 require 'bototo/bot'
 require 'bototo/handlers'
-
-Dir[File.dirname(__FILE__) + '/bototo/handlers/*.rb'].each do |path|
-  require File.join('bototo', 'handlers', File.basename(path, '.rb'))
-end
