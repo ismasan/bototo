@@ -8,6 +8,7 @@ Bototo.setup do |config|
   config.subdomain      = 'mycompany'
   config.token          = 'campfire-api-token'
   config.room_name      = 'Main room'
+  # config.handler_paths << File.dirname(__FILE__) + '/my_handlers' # load custom handlers from here
   # config.max_retries = 10 # default to -1, which means perform connection retries on drop forever.
 end
 
