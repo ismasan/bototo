@@ -35,8 +35,12 @@ module Bototo
         @matched_command, @matches = matched_command, matches
       end
       
-      def say(text)
-        room.speak text
+      def say(text, &block)
+        room.speak text, &block
+      end
+      
+      def paste(text, &block)
+        room.paste text, &block
       end
 
       def self.command(*cmds)
