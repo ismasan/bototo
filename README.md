@@ -36,6 +36,11 @@ On campfire, on the "Main room" room:
     
     mybot image me a cute cat
     
+
+Run examples/bot.rb
+
+    $ ruby examples/bot.rb
+    
 ## Daemonizing
 
 You can daemonize with God or Monit, or using the Daemons gem:
