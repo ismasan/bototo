@@ -40,7 +40,33 @@ On campfire, on the "Main room" room:
 Run examples/bot.rb
 
     $ ruby examples/bot.rb
-    
+
+## Custom handler classes
+
+Bototo.register do ... end is fine for small command handlers. For anything more complicated you can create your own class extending from Bototo::Handlers::Base
+
+```ruby
+class PrivateStatusHandler < Bototo::Handlers::Base
+  
+  URL = 'https://my.api.com/status'
+  
+  on "what's the status" do 
+    get_json(URL) do |json|
+      paste formatted(json)
+    end
+  end
+  
+  protected
+  
+  def protected(json)
+    # ... format json into nice string
+    lines = json['reports'].map {|r| r['date'] + ' -- ' + r['description']}
+    lines.join "\n"
+  end
+  
+end
+```
+
 ## Daemonizing
 
 You can daemonize with God or Monit, or using the Daemons gem:
