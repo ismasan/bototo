@@ -70,6 +70,9 @@ class PrivateStatusHandler < Bototo::Handlers::Base
   end
   
 end
+
+# Register your handler
+Bototo.register PrivateStatusHandler
 ```
 
 ## Daemonizing
