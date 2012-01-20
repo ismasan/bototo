@@ -1,6 +1,6 @@
 module Bototo
   
-  class App
+  class Bot
     
     attr_reader :config, :connection
     

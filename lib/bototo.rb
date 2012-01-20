@@ -14,8 +14,8 @@ module Bototo
     @config ||= Config.new
   end
   
-  def self.default_app
-    @default_app ||= App.new(config)
+  def self.default_bot
+    @default_bot ||= Bot.new(config)
   end
   
   def self.register(&block)
@@ -24,7 +24,7 @@ module Bototo
   
   def self.run!
     EM.run do
-      default_app.run!
+      default_bot.run!
       trap("INT") { EM.stop }
     end
   end
@@ -33,7 +33,7 @@ module Bototo
   
 end
 
-require 'bototo/app'
+require 'bototo/bot'
 require 'bototo/handlers'
 
 Dir[File.dirname(__FILE__) + '/bototo/handlers/*.rb'].each do |path|
