@@ -56,6 +56,11 @@ class PrivateStatusHandler < Bototo::Handlers::Base
     end
   end
   
+  on /my bank account balance for (.+)/ do |date|
+    # talk to your bank's API, or something
+    say "My balance is ..."
+  end
+  
   protected
   
   def protected(json)
