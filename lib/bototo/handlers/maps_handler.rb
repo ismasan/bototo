@@ -5,7 +5,7 @@ Bototo.register do
       say url
     else
       location = CGI.escape(value)
-      map_url = "'http://maps.google.com/maps/api/staticmap?markers='#{location}&size=400x400&maptype=roadmap&sensor=false&format=png"
+      map_url = "http://maps.google.com/maps/api/staticmap?markers=#{location}&size=400x400&maptype=roadmap&sensor=false&format=png"
       link_url = "http://maps.google.com/maps?q=#{location}&hl=en&sll=37.0625,-95.677068&sspn=73.579623,100.371094&vpsrc=0&hnear=#{location}&t=m&z=11"
       say(map_url) {
         say link_url
