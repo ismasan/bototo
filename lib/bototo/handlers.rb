@@ -71,6 +71,8 @@ module Bototo
 
       # Some utilities
       def get_json(url, options = {}, &block)
+        options[:head] ||= {}
+        options[:head]['Accept'] = 'application/json'
         EM::HttpRequest.new(url).get(options).callback { |http|
           begin
             if http.response_header.status.to_s =~ /^20/
