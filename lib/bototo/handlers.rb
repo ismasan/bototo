@@ -89,7 +89,7 @@ module Bototo
 
       def post(url, opts = {}, &block)
         EM::HttpRequest.new(url).post(opts).callback { |http|
-          if http.response_header.status.to_s =~ /^20/
+          if (200..399).include? http.response_header.status.to_i
             block.call http
           else
             room.speak "Error: #{http.response}"
